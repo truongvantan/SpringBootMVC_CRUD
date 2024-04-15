@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Trang user</title>
+</head>
+<body>
+	<h1>Trang của user</h1>
+	<h2 > Xin chào <span th:text="${session.sessionAccount}"></span></h2>
+	<a th:href="@{/logout}">Đăng xuất</a>
+</body>
+</html>

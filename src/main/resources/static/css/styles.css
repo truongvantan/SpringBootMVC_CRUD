@@ -1,0 +1,25 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+}
+
+/* navbar */
+.navbar {
+	background-color: rgb(94, 140, 231) !important;
+}
+
+.border-yellow {
+	border: 2px dashed yellow;
+}
+
+.logo {
+	width: 30px;
+	height: 30px;
+}
+
+.error {
+	font: italic;
+	color: red;
+}

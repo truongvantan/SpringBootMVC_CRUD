@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chỉnh sửa sản phẩm</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+	crossorigin="anonymous" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+	<div th:insert="~{fragments/header :: header}"></div>
+	
+	<div class="container-fluid">
+		<h2 class="text-center mt-2">Thông tin sản phẩm</h2>
+		<p class="text-center text-danger">[[${errorMessage}]]</p>
+		<div class="row d-flex justify-content-center">
+			<form action="#" th:action="@{/product/edit}" th:object="${product}" method="POST"
+				class="w-75 mt-2">
+				<div class="row d-flex justify-content-center">
+					<div class="form-outline mb-4 w-50 text-center">
+						<label
+							class="form-label text-center text-primary font-weight-bold"
+							for="productId">Mã sản phẩm</label> 
+						<input type="text"
+							class="form-control text-center" disabled 
+							th:value="${errorMessage == null}? ${product.id} : ${param.productId}"
+							th:field="${product.id}"
+							/> 
+						<input
+							type="hidden"
+							name="productId" id="productId" 
+							th:value="${errorMessage == null}? ${product.id} : ${param.productId}"
+							th:field="${product.id}"
+						/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-xs-12">
+						<div class="form-outline mb-4">
+							<label class="form-label text-primary font-weight-bold"
+								for="productName">Tên sản phẩm <span class="text-danger">(*)</span></label> 
+								<input 
+									type="text" 
+									name="productName"
+									id="productName"
+									class="form-control"
+									placeholder="Tên sản phẩm" 
+									th:value="${param.productName} ?: ''" 
+									th:field="${product.productName}"
+								/>
+								<span th:if="${#fields.hasErrors('productName')}" th:errors="${product.productName}"
+										class="text-danger"></span>
+						</div>
+						<div class="form-outline mb-4">
+							<label class="form-label text-primary font-weight-bold"
+								for="listCategories">Thương hiệu <span class="text-danger">(*)</span></label> 
+							<select 
+								class="form-control d-inline-block"
+								name="categoryId"
+								id="listCategories"
+								th:field="${product.categoryId}"
+							>
+								<option th:each="category : ${listCategories}" th:value="${category.id}">
+									[[${category.categoryName}]]
+								</option>
+							</select>
+							<span th:if="${#fields.hasErrors('categoryId')}" th:errors="${product.categoryId}"
+										class="text-danger"></span>
+						</div>
+						<div class="form-outline mb-4">
+							<label class="form-label text-primary font-weight-bold"
+								for="priceIn">Đơn giá nhập <span class="text-danger">(*)</span></label>
+							<input type="text"
+								name="priceIn" id="priceIn" class="form-control"
+								placeholder="Đơn giá nhập" 
+								th:field="${product.priceIn}"
+								th:value="${param.priceIn} ?: ''"
+							/>
+							<span th:if="${#fields.hasErrors('priceIn')}" th:errors="${product.priceIn}"
+										class="text-danger"></span>
+						</div>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<div class="form-outline mb-4">
+							<label class="form-label text-primary font-weight-bold"
+								for="priceSell">Đơn giá bán <span class="text-danger">(*)</span></label>
+							<input type="text"
+								name="priceSell" id="priceSell" class="form-control"
+								placeholder="Đơn giá bán" 
+								th:field="${product.priceSell}"
+								th:value="${param.priceSell} ?: ''"
+							/>
+							<span th:if="${#fields.hasErrors('priceSell')}" th:errors="${product.priceSell}"
+										class="text-danger"></span>
+						</div>
+						<div class="form-outline mb-4">
+							<label class="form-label text-primary font-weight-bold"
+								for="linkImage">Link hình ảnh</label> 
+							<input type="text"
+								name="linkImage" id="linkImage" class="form-control"
+								placeholder="Link hình ảnh" 
+								th:field="${product.linkImage}"
+								th:value="${param.linkImage} ?: ''"
+							/>
+						</div>
+						<div class="form-outline mb-4">
+							<label class="form-label text-primary font-weight-bold"
+								for="description">Mô tả</label> 
+							<input type="text"
+								name="description" id="description" class="form-control"
+								placeholder="Mô tả" 
+								th:field="${product.description}"
+								th:value="${param.description} ?: ''"
+							/>
+						</div>
+					</div>
+				</div>
+				<div class="row d-flex justify-content-center">
+					<input type="submit" class="btn btn-primary w-25 mr-1" value="Chỉnh sửa" />
+					<input type="reset" class="btn btn-secondary w-25" value="Reset" />
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+		crossorigin="anonymous"></script>
+
+	<script>
+		/*<![CDATA[*/
+			const categoryIdParam = /*[[${errorMessage == null}? ${product.categoryId} : ${param.categoryId}]]*/ '1'
+		/*]]>*/
+	
+		$(document).ready(function() {
+			$('#listCategories').val(categoryIdParam);
+		});
+	</script>
+</body>
+</html>
