@@ -24,122 +24,98 @@
 <body>
 
 	<div th:insert="~{fragments/header :: header}"></div>
-	
+
 	<div class="container-fluid">
 		<h2 class="text-center mt-2">Thông tin sản phẩm</h2>
 		<p class="text-center text-danger">[[${errorMessage}]]</p>
 		<div class="row d-flex justify-content-center">
-			<form action="#" th:action="@{/product/edit}" th:object="${product}" method="POST"
-				class="w-75 mt-2">
+			<form action="#" th:action="@{/product/edit}" th:object="${product}"
+				method="POST" class="w-75 mt-2">
 				<div class="row d-flex justify-content-center">
 					<div class="form-outline mb-4 w-50 text-center">
 						<label
 							class="form-label text-center text-primary font-weight-bold"
-							for="productId">Mã sản phẩm</label> 
-						<input type="text"
-							class="form-control text-center" disabled 
+							for="productId">Mã sản phẩm</label> <input type="text"
+							class="form-control text-center" disabled
 							th:value="${errorMessage == null}? ${product.id} : ${param.productId}"
-							th:field="${product.id}"
-							/> 
-						<input
-							type="hidden"
-							name="productId" id="productId" 
+							th:field="${product.id}" /> <input type="hidden"
+							name="productId" id="productId"
 							th:value="${errorMessage == null}? ${product.id} : ${param.productId}"
-							th:field="${product.id}"
-						/>
+							th:field="${product.id}" />
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6 col-xs-12">
 						<div class="form-outline mb-4">
 							<label class="form-label text-primary font-weight-bold"
-								for="productName">Tên sản phẩm <span class="text-danger">(*)</span></label> 
-								<input 
-									type="text" 
-									name="productName"
-									id="productName"
-									class="form-control"
-									placeholder="Tên sản phẩm" 
-									th:value="${param.productName} ?: ''" 
-									th:field="${product.productName}"
-								/>
-								<span th:if="${#fields.hasErrors('productName')}" th:errors="${product.productName}"
-										class="text-danger"></span>
+								for="productName">Tên sản phẩm <span class="text-danger">(*)</span></label>
+							<input type="text" name="productName" id="productName"
+								class="form-control" placeholder="Tên sản phẩm"
+								th:value="${param.productName} ?: ''"
+								th:field="${product.productName}" /> <span
+								th:if="${#fields.hasErrors('productName')}"
+								th:errors="${product.productName}" class="text-danger"></span>
 						</div>
 						<div class="form-outline mb-4">
 							<label class="form-label text-primary font-weight-bold"
-								for="listCategories">Thương hiệu <span class="text-danger">(*)</span></label> 
-							<select 
-								class="form-control d-inline-block"
-								name="categoryId"
-								id="listCategories"
-								th:field="${product.categoryId}"
-							>
-								<option th:each="category : ${listCategories}" th:value="${category.id}">
-									[[${category.categoryName}]]
-								</option>
-							</select>
-							<span th:if="${#fields.hasErrors('categoryId')}" th:errors="${product.categoryId}"
-										class="text-danger"></span>
+								for="listCategories">Thương hiệu <span
+								class="text-danger">(*)</span></label> <select
+								class="form-control d-inline-block" name="categoryId"
+								id="listCategories" th:field="${product.categoryId}">
+								<option th:each="category : ${listCategories}"
+									th:value="${category.id}">
+									[[${category.categoryName}]]</option>
+							</select> <span th:if="${#fields.hasErrors('categoryId')}"
+								th:errors="${product.categoryId}" class="text-danger"></span>
 						</div>
 						<div class="form-outline mb-4">
 							<label class="form-label text-primary font-weight-bold"
 								for="priceIn">Đơn giá nhập <span class="text-danger">(*)</span></label>
-							<input type="text"
-								name="priceIn" id="priceIn" class="form-control"
-								placeholder="Đơn giá nhập" 
-								th:field="${product.priceIn}"
-								th:value="${param.priceIn} ?: ''"
-							/>
-							<span th:if="${#fields.hasErrors('priceIn')}" th:errors="${product.priceIn}"
-										class="text-danger"></span>
+							<input type="text" name="priceIn" id="priceIn"
+								class="form-control" placeholder="Đơn giá nhập"
+								th:field="${product.priceIn}" th:value="${param.priceIn} ?: ''" />
+							<span th:if="${#fields.hasErrors('priceIn')}"
+								th:errors="${product.priceIn}" class="text-danger"></span>
 						</div>
 					</div>
 					<div class="col-md-6 col-xs-12">
 						<div class="form-outline mb-4">
 							<label class="form-label text-primary font-weight-bold"
 								for="priceSell">Đơn giá bán <span class="text-danger">(*)</span></label>
-							<input type="text"
-								name="priceSell" id="priceSell" class="form-control"
-								placeholder="Đơn giá bán" 
+							<input type="text" name="priceSell" id="priceSell"
+								class="form-control" placeholder="Đơn giá bán"
 								th:field="${product.priceSell}"
-								th:value="${param.priceSell} ?: ''"
-							/>
-							<span th:if="${#fields.hasErrors('priceSell')}" th:errors="${product.priceSell}"
-										class="text-danger"></span>
+								th:value="${param.priceSell} ?: ''" /> <span
+								th:if="${#fields.hasErrors('priceSell')}"
+								th:errors="${product.priceSell}" class="text-danger"></span>
 						</div>
 						<div class="form-outline mb-4">
 							<label class="form-label text-primary font-weight-bold"
-								for="linkImage">Link hình ảnh</label> 
-							<input type="text"
+								for="linkImage">Link hình ảnh</label> <input type="text"
 								name="linkImage" id="linkImage" class="form-control"
-								placeholder="Link hình ảnh" 
-								th:field="${product.linkImage}"
-								th:value="${param.linkImage} ?: ''"
-							/>
+								placeholder="Link hình ảnh" th:field="${product.linkImage}"
+								th:value="${param.linkImage} ?: ''" />
 						</div>
 						<div class="form-outline mb-4">
 							<label class="form-label text-primary font-weight-bold"
-								for="description">Mô tả</label> 
-							<input type="text"
+								for="description">Mô tả</label> <input type="text"
 								name="description" id="description" class="form-control"
-								placeholder="Mô tả" 
-								th:field="${product.description}"
-								th:value="${param.description} ?: ''"
-							/>
+								placeholder="Mô tả" th:field="${product.description}"
+								th:value="${param.description} ?: ''" />
 						</div>
 					</div>
 				</div>
 				<div class="row d-flex justify-content-center">
-					<input type="submit" class="btn btn-primary w-25 mr-1" value="Chỉnh sửa" />
-					<input type="reset" class="btn btn-secondary w-25" value="Reset" />
+					<input type="submit" class="btn btn-primary w-25 mr-1"
+						value="Chỉnh sửa" /> <input type="reset"
+						class="btn btn-secondary w-25" value="Reset" />
 				</div>
 			</form>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
 		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -149,12 +125,12 @@
 		integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 		crossorigin="anonymous"></script>
 
-	<script>
-		/*<![CDATA[*/
-			const categoryIdParam = /*[[${errorMessage == null}? ${product.categoryId} : ${param.categoryId}]]*/ '1'
-		/*]]>*/
-	
+	<script type="text/javascript" th:inline="javascript">
 		$(document).ready(function() {
+			/*<![CDATA[*/
+			const categoryIdParam = /*[[${product.categoryId}]]*/
+			/*]]>*/
+			console.log("categoryIdParam=",categoryIdParam)
 			$('#listCategories').val(categoryIdParam);
 		});
 	</script>

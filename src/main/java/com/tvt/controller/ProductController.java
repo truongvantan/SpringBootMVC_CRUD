@@ -196,7 +196,6 @@ public class ProductController {
 		if (session.getAttribute("sessionAccount") == null) {
 			return "redirect:/login?error=1";
 		} else {
-			System.err.println("showEdit productId="+productId);
 			Product p = productService.findById(productId);
 			if (p == null) {
 				model.addAttribute("errorMessage", "Không thể chỉnh sửa sản phẩm. Sản phẩm không tồn tại");
@@ -225,7 +224,6 @@ public class ProductController {
 				model.addAttribute("listCategories", listCategories);
 				return "views/editProduct";
 			} else {
-				System.err.println("Edit productId="+p.getId());
 				String message = productService.save(p);
 				if ("No error".equals(message)) {
 					model.addAttribute("successMessage", "Chỉnh sửa sản phẩm thành công");
